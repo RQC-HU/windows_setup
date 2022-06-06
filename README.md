@@ -1,4 +1,4 @@
-# Windows(& WSL2 Ubuntu)セットアップ説明書
+# Windowsセットアップ説明書
 
 <!-- vscode-markdown-toc -->
 1. [はじめに](#introduction)
