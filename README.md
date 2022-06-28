@@ -64,7 +64,7 @@
 - 以下のコマンドを実行
 
   ```powershell
-    cd ~/Desktop/windows_setup-main/windows_setup-main/scripts
+    cd ~/Desktop/windows_setup-main/windows_setup-main
     powershell -ExecutionPolicy ByPass -File "windowssetup.ps1"
   ```
 
