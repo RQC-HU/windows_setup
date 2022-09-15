@@ -19,7 +19,7 @@
 
 ## 2. <a name='attention'></a>注意
 
-- 各コマンドは選択してctrl+cでコピー、ctrl+vで貼り付けすることができます
+- 各コマンドは選択してctrl+c(コントロールキーを押しながらcキーを押す)でコピー、ctrl+vで貼り付けすることができます
 
 - インターネットとの通信がかなりあるので<span style="color:darkorange">高速で安定なネットワーク(できれば有線)環境下で実行してください</span>
 
@@ -27,48 +27,52 @@
 
 ## 3. <a name='setup'></a>セットアップ手順
 
-### 3.1. リポジトリのダウンロードと配置
+### 3.1. アカウントの確認
+
+- まずはあなたがログイン中のWindowsユーザがWindowsの管理者であることを確認します(管理者でないと以降の作業がうまくいきません)
+  - windowsの設定 → アカウント → ユーザの情報 で表示されるユーザのアイコンの下に管理者(又はAdministrator)という文字列があることを確認できればOKです
+  - [windowsの設定がどこにあるかわからない場合はこちらを参照してください](https://support.microsoft.com/ja-jp/windows/windows-10-%E3%81%A7%E8%A8%AD%E5%AE%9A%E3%82%92%E8%A6%8B%E3%81%A4%E3%81%91%E3%82%8B-6ffbef87-e633-45ac-a1e8-b7a834578ac6)
+  - 管理者でない場合、このスクリプト群は使えないので[管理者になる方法を参照](https://www.fmworld.net/cs/azbyclub/qanavi/jsp/qacontents.jsp?PID=8610-8270)してください
+
+### 3.2. リポジトリのダウンロードと展開
 
 - [このリポジトリ](https://github.com/kohei-noda-qcrg/windows_setup)にアクセスして<span style="background-color:darkgreen;color:white">Code</span>からZipファイルをダウンロードします
-<img src="./img/download_from_github.jpeg" alt="desktop" width="1000"/>
+<img src="./img/github-repo-download-zip.png" alt="desktop" width="1000"/>
 
-- セットアップ手順を簡単にするためダウンロードしたzipファイル(windows_setup-main)を<span style="color:darkorange">デスクトップに配置</span>してください  
-(powershellやwsl2に慣れている人は以降のコマンドのパスをzipファイルを展開したあとのフォルダのパスに置き換えて実行してもらってもよいです)
+- 以下の画像のようにしてダウンロードしたファイルがあるフォルダをエクスプローラーで開きます(ダウンロードしたフォルダが開けるなら他の方法を開いても構いません)
 
-  以下の画像のようにwindows_setup-mainフォルダがデスクトップにあればOKです  
-  <img src="./img/unzip00.png" alt="desktop" width="1000"/>
+  ※以下のような画面が出てこない場合はctrl+jを押せば以下のような画面になります
+  - Microsoft Edge
+   <img src="./img/open-zip.png" />
+  - Google Chrome
+   <img src="./img/open-zip-chrome.png" />
+    - Google Chrome(ctrl+jで開いた場合)
+      <img src="./img/open-zip-chrome-ctrl-j.png" />
 
-- デスクトップに配置したzipファイルの上で右クリックし、すべて展開(T)...を選択します
-  <img src="./img/unzip01.png" alt="desktop" width="1000"/>
+- ダウンロードしたzipファイルの上で右クリックし、すべて展開(T)...を選択し、開かれたウィンドウの展開を選択してファイルを展開します
+ <img src="./img/extract-all.png" />  
+ <img src="./img/select-extract-folder.png" />
 
-- 以下のようなウィンドウが表示されるので展開(E)を選択します
-  <img src="./img/unzip02.png" alt="desktop" width="1000"/>
+- ファイルを展開すると展開したフォルダがエクスプローラーで開かれるので、以下のような画面(windowssetup.ps1があるフォルダ)まで左クリックで移動します
+<img src="./img/open-repo-root-folder.jpg" />
 
-- 以下の画像のようにデスクトップにwindows_setup-mainフォルダが表示されればOKです
-  <img src="./img/unzip03.png" alt="desktop" width="1000"/>
+- 今後の手順で使うので、以下の画像の囲まれている部分を左クリックするとフォルダの場所が表示されるので、その文字列をコピーしてください
+  **(※今後の手順でコピーした文字列と書いてある部分がありますが、その部分はこの手順でコピーした文字列に読み替え及び手順の実行をしてください)**
+<img src="./img/copy-repo-root-folder-path.jpg">
 
-### 3.1. Windows上の開発ツール等のインストール
+### 3.3. Windows上の開発ツール等のインストール
 
 - powershellを<span style="color:darkorange">管理者で実行</span>します  
   <img src="./img/open_powershell_as_administrator.png" alt="open_powershell_as_administrator" width="1000"/>
-  <details><summary style="color:red">powershellを管理者で実行できない場合</summary><div>
-
-  >(powershellを管理者で実行できない場合)  
-  >[必要なソフトウェア等を手動インストール](#whatsdoingthesescripts)する(このスクリプト群はなにをしているのか？のWindowsの欄のセットアップを手動実行する)ことをお勧めします  
-  >
-  >またpowershellが管理者権限で開けないだけでユーザ自体が管理者の場合、管理者でない状態で自動インストールが可能ですが  
-  >UAC(ユーザアカウント制御)のポップアップが表示されるのでその度に許可をしてください  
-
-  </div></details>
 
 - 以下のコマンドを実行
 
   ```powershell
-    cd $home/Desktop/windows_setup-main/windows_setup-main
+    cd コピーした文字列
     powershell -ExecutionPolicy ByPass -File "windowssetup.ps1"
   ```
 
-  <img src="./img/run_windowssetup.png" alt="run_windowssetup" width="1000"/>
+  <img src="./img/run-command.jpg" alt="run_windowssetup" width="1000"/>
 
   > <注記>  
   > ソフトウェアのインストールには[winget](https://github.com/microsoft/winget-cli)を使っていますが  
@@ -85,6 +89,7 @@
 - [$home/.ssh/config](https://qiita.com/passol78/items/2ad123e39efeb1a5286b#sshconfig%E3%82%92%E6%9B%B8%E3%81%8F%E3%81%A8%E4%BD%95%E3%81%8C%E5%AC%89%E3%81%97%E3%81%84%E3%81%8B)の編集
 
   - まずPowershellを開いて、\$home/.sshフォルダの作成、configファイルの作成、configファイルをメモ帳で開く操作を以下のコマンドで行います
+
     ```sh
       mkdir -p $home/.ssh
       New-Item $home/.ssh/config
@@ -131,9 +136,8 @@
 
 以下のことを自動実行しています
 
-- Windows(powershellを管理者で実行できない場合はこれらの設定を手動で行ってください)
-  - 必要なソフトウェア[VScode](https://code.visualstudio.com/), [7zip](https://sevenzip.osdn.jp/), [WinSCP](https://winscp.net/eng/index.php), [Git for windows](https://gitforwindows.org/), [Windows Terminal](https://www.microsoft.com/ja-jp/p/windows-terminal/9n0dx20hk701), [Teraterm](https://ttssh2.osdn.jp/index.html.ja), [VcXsrv](https://sourceforge.net/projects/vcxsrv/)のインストール
-  - config.xlaunch (Xサーバ設定用ファイル)を使ったxサーバの設定を行う
+- 必要なソフトウェア[VScode](https://code.visualstudio.com/), [7zip](https://sevenzip.osdn.jp/), [WinSCP](https://winscp.net/eng/index.php), [Git for windows](https://gitforwindows.org/), [Windows Terminal](https://www.microsoft.com/ja-jp/p/windows-terminal/9n0dx20hk701), [Teraterm](https://ttssh2.osdn.jp/index.html.ja), [VcXsrv](https://sourceforge.net/projects/vcxsrv/)のインストール
+- config.xlaunch (Xサーバ設定用ファイル)を使ったxサーバの設定を行う
 
 ## 5. <a name='files'></a>ファイル一覧
 
