@@ -6,6 +6,7 @@
 1. [セットアップ手順](#setup)
 1. [このスクリプトはなにをしているのか？](#whatsdoingthesescripts)
 1. [ファイル一覧](#files)
+1. [ライセンス](#licence)
 
 ## 1. <a name='introduction'></a>はじめに
 
@@ -145,5 +146,10 @@
 
 - img (README用画像フォルダ)
 - config.xlaunch (Xサーバ設定用ファイル)
+- LICENCE (ライセンスファイル)
 - windowssetup.ps1 (Windowsに開発に必須/便利なソフトウェアのインストールを行うスクリプト)
 - README (このファイル)
+
+## 6. <a name='licence'></a>ライセンス
+このプログラムはMITライセンスのもと提供されています  
+詳しくは[このリポジトリのライセンスファイル](https://github.com/kohei-noda-qcrg/windows_setup/blob/main/LICENSE)を参照してください
