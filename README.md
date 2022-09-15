@@ -15,7 +15,7 @@
 
 - [OpenSSH](https://docs.microsoft.com/ja-jp/windows-server/administration/openssh/openssh_install_firstuse)をインストールすることで、ssh鍵を使ったリモートサーバへのログインが可能になる
 - [Visual Studio Code](https://code.visualstudio.com/)を使って便利な拡張機能を使ったテキスト処理、インプットの作成などが可能になる
-- ~/.ssh/configを編集することで、sshやrsync,scpなどのコマンドの手順を簡略化できるようになる
+- $home/.ssh/configを編集することで、sshやrsync,scpなどのコマンドの手順を簡略化できるようになる
 
 ## 2. <a name='attention'></a>注意
 
@@ -64,7 +64,7 @@
 - 以下のコマンドを実行
 
   ```powershell
-    cd ~/Desktop/windows_setup-main/windows_setup-main
+    cd $home/Desktop/windows_setup-main/windows_setup-main
     powershell -ExecutionPolicy ByPass -File "windowssetup.ps1"
   ```
 
@@ -82,20 +82,20 @@
 
   <span style="color:darkorange">計算機へのログインのためのユーザを作成済み</span>の場合、以下の設定を行ってください  
 
-- [~/.ssh/config](https://qiita.com/passol78/items/2ad123e39efeb1a5286b#sshconfig%E3%82%92%E6%9B%B8%E3%81%8F%E3%81%A8%E4%BD%95%E3%81%8C%E5%AC%89%E3%81%97%E3%81%84%E3%81%8B)の編集
+- [$home/.ssh/config](https://qiita.com/passol78/items/2ad123e39efeb1a5286b#sshconfig%E3%82%92%E6%9B%B8%E3%81%8F%E3%81%A8%E4%BD%95%E3%81%8C%E5%AC%89%E3%81%97%E3%81%84%E3%81%8B)の編集
 
-  - まずPowershellを開いて、\~/.sshディレクトリの作成、configファイルの作成、configファイルをメモ帳で開く操作を以下のコマンドで行います
+  - まずPowershellを開いて、\$home/.sshフォルダの作成、configファイルの作成、configファイルをメモ帳で開く操作を以下のコマンドで行います
     ```sh
-      mkdir -p ~/.ssh
-      New-Item ~/.ssh/config
-      notepad ~/.ssh/config
+      mkdir -p $home/.ssh
+      New-Item $home/.ssh/config
+      notepad $home/.ssh/config
     ```
 
 - configファイルを以下のテンプレートを参考にして編集してください。以下の記事も参考にできると思います
   - [.ssh/configの基本的な考え方と各設定の意味、設定例が載っています](https://qiita.com/0084ken/items/2e4e9ae44ec5e01328f1)
   - [踏み台サーバ経由でログインしたい場合はこちらを参考にしてください](https://qiita.com/ik-fib/items/12e4fab4478e360a82a1)
 
-    <\~/.ssh/configのテンプレート>
+    <\$home/.ssh/configのテンプレート>
 
     ```config
       ServerAliveInterval 60
