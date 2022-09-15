@@ -1,3 +1,85 @@
+##################################
+# Check whether scripts are exist
+##################################
+$scriptPath = $MyInvocation.MyCommand.Path
+$path = Split-Path -Parent $scriptPath
+# If even one file($data) does not exist, the script will stop executing.
+$data = @('config.xlaunch', 'do_not_turn_off.pow')
+$data | ForEach-Object {
+    if (!(Test-Path -Path $_ -PathType Leaf)) {
+        Write-Host "Error: $_ is not exist."
+        Write-Host "Exit."
+        exit
+    }
+}
+
+######################################
+# Power settings
+######################################
+New-Item -Path $Env:USERPROFILE\power_guid_default_setting -Force -ItemType Directory
+Function getGUID($arg = "*") {
+    $flag = 0 # If GUID: found, $flag = 1
+    $guid = "" # When $flag is 1, get the value of $var divided at that time and set $flag to 0
+
+    # Get powercfg settings text including $arg
+    $text = powercfg -list | findstr $arg
+    # Split $text
+    $split = $text -split " "
+    foreach ($var in $split) {
+        # Set $guid to $var when $flag = 1
+        if ($flag -eq 1) {
+            $guid = $var
+            $flag = 0
+        }
+        # If $var="GUID:", set $flag to 1
+        if ($var -eq "GUID:") {
+            $flag = 1
+        }
+    }
+    if ( $guid -eq "") {
+        # Error
+        Write-Host "GUID is empty"
+        return -1
+    }
+    else {
+        Write-Host "Found GUID"
+        return $guid
+    }
+}
+Function cantgetGUIDerr() {
+    # Quit powercfg setting
+    Write-Host "!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!="
+    Write-Host "<ERROR: powercfg settings GUID obtain error>"
+    Write-Host "Powercfg setting was stopped because GUID could not be obtained."
+    Write-Host "Make sure to manually configure or monitor Windows to prevent it from going to sleep"
+    Write-Host "!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!=!="
+}
+powercfg -list
+$defaultsetting = -1
+$defaultsetting = getGUID("*")
+if ($defaultsetting -ne -1) {
+    Write-Host "GUID of Default power setting is $defaultsetting"
+    Set-Content "$Env:USERPROFILE\power_guid_default_setting\default_power_setting_guid.txt" $defaultsetting
+    Copy-Item ".\do_not_turn_off.pow" "$Env:USERPROFILE\power_guid_default_setting"
+    powercfg -import "$Env:USERPROFILE\power_guid_default_setting\do_not_turn_off.pow"
+    Remove-Item "$Env:USERPROFILE\power_guid_default_setting\do_not_turn_off.pow"
+    powercfg -list
+    $do_not_turn_off = -1
+    $do_not_turn_off = getGUID("do_not_turn_off")
+    if ($do_not_turn_off -ne -1) {
+        Write-Host "GUID of do_not_turn_off power setting is $do_not_turn_off"
+        powercfg -setactive $do_not_turn_off
+        Write-Host "do_not_turn_off power setting is activated!"
+        powercfg -list
+    }
+    else {
+        cantgetGUIDerr
+    }
+}
+else {
+    cantgetGUIDerr
+}
+
 ######################################
 # Copy X-server settings
 ######################################
@@ -58,3 +140,18 @@ winget install --silent TeraTermProject.teraterm --override "/VERYSILENT"
 # VcXsrv (https://sourceforge.net/projects/vcxsrv/) is a X-server software.
 # If you want to use GUI software when you use CLI WSL linux, VcXsrv supports this(GUI) feature.
 winget install --silent marha.VcXsrv
+
+##############################
+# Restore default power setting
+##############################
+
+$defaultsetting=-1
+$defaultsetting= Get-Content "$Env:USERPROFILE\power_guid_default_setting\default_power_setting_guid.txt"
+Write-Host "defaultsetting is "$defaultsetting
+if ($defaultsetting -ne -1){
+    powercfg -setactive $defaultsetting
+    Write-Host "default power setting is  reactivated!"
+    powercfg -list
+}else{
+cantgetGUIDerr
+}

@@ -146,6 +146,7 @@
 
 - img (README用画像フォルダ)
 - config.xlaunch (Xサーバ設定用ファイル)
+- do_not_turn_off.pow (スクリプト実行中にスリーブしないように強制させるためのファイル)
 - LICENCE (ライセンスファイル)
 - windowssetup.ps1 (Windowsに開発に必須/便利なソフトウェアのインストールを行うスクリプト)
 - README (このファイル)
