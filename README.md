@@ -44,10 +44,12 @@
   ※以下のような画面が出てこない場合はctrl+jを押せば以下のような画面になります
   - Microsoft Edge
    <img src="./img/open-zip.png" />
+
   - Google Chrome
    <img src="./img/open-zip-chrome.png" />
-    - Google Chrome(ctrl+jで開いた場合)
-      <img src="./img/open-zip-chrome-ctrl-j.png" />
+
+  - Google Chrome(ctrl+jで開いた場合)
+   <img src="./img/open-zip-chrome-ctrl-j.png" />
 
 - ダウンロードしたzipファイルの上で右クリックし、すべて展開(T)...を選択し、開かれたウィンドウの展開を選択してファイルを展開します
  <img src="./img/extract-all.png" />  
