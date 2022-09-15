@@ -1,9 +1,8 @@
-$ErrorActionPreference = "Stop" # Stop to executing program when error is occured
-
 ##################################
 # Check whether scripts are exist
 ##################################
-
+$scriptPath = $MyInvocation.MyCommand.Path
+$path = Split-Path -Parent $scriptPath
 # If even one file($data) does not exist, the script will stop executing.
 $data = @('config.xlaunch', 'do_not_turn_off.pow')
 $data | ForEach-Object {
@@ -109,6 +108,7 @@ if ( -not ( Get-Command $winget -ErrorAction "silentlycontinue" ) ) {
     invoke-webrequest -uri https://github.com/microsoft/winget-cli/releases/download/v1.0.12576/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -outfile $Env:USERPROFILE\Downloads\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle -UseBasicParsing
     Add-AppxPackage -Path $Env:USERPROFILE\Downloads\Microsoft.VCLibs.x64.14.00.Desktop.appx
     Add-AppxPackage -Path $Env:USERPROFILE\Downloads\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+    ls $Env:USERPROFILE\Downloads
 }
 
 ##############################
