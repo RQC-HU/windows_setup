@@ -85,6 +85,65 @@
   ↓文字化けの様子  
   <img src="./img/mojibake.png" alt="mojibake" width="1000"/>
 
+### Windows Terminalの設定
+
+- ターミナルソフトウェアとしては[Windows Terminal](https://www.microsoft.com/ja-jp/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab)を使うことを推奨します
+- 強制ではないので、他のターミナルソフトウェアを使う場合は以下の手順は不要です
+
+- スクリプトが終わるとスクリプトと同じフォルダにgit_settings.jsonが生成されるのでその設定をWindows Terminalに反映させます  
+
+  - Windows Terminalを起動し、ctrl+,を押して設定を開きます
+  - 左下のJSONファイルを開くを左クリックして、settings.jsonを開きます
+  - 以下のようなlistの続きにgit_settings.jsonの中身を貼り付けます(他のリストの中身との間にはカンマ(,)が必要なので、必要に応じてカンマを追加してください)
+
+  (例)
+  設定前
+
+  ```json
+  {
+      "profiles": {
+          "defaults": {},
+          "list": [
+              {
+                  "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                  "hidden": false,
+                  "name": "Ubuntu-20.04",
+                  "source": "Windows.Terminal.Wsl"
+              }
+          ]
+      }
+  }
+  ```
+
+  設定後
+
+  ```json
+  {
+      "profiles": {
+          "defaults": {},
+          "list": [
+              {
+                  "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                  "hidden": false,
+                  "name": "Ubuntu-20.04",
+                  "source": "Windows.Terminal.Wsl"
+              },
+              {
+                  "commandline": "%PROGRAMFILES%\\Git\\bin\\bash.exe",
+                  "guid": "{f3f3f3aa-491e-4c59-873c-bd106f728490}",
+                  "hidden": false,
+                  "icon": "%PROGRAMFILES%\\Git\\mingw64\\share\\git\\git-for-windows.ico",
+                  "name": "Git Bash",
+                  "startingDirectory": "%USERPROFILE%"
+              }
+          ]
+      }
+  }
+  ```
+
+  - 保存して、Windows Terminalの画面にエラーが出なければ設定完了です(以降はwindows Terminalを使ってGit Bashを起動できるようになります)
+  - Windows Terminal起動時のデフォルトをGit Bashに変更したい場合はWindows Terminalの設定から既定のプロファイルをGit Bashに変更してください
+
 ### 3.4. SSHの設定
 
   <span style="color:darkorange">計算機へのログインのためのユーザを作成済み</span>の場合、以下の設定を行ってください  
