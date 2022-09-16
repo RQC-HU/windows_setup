@@ -142,6 +142,21 @@ winget install --silent TeraTermProject.teraterm --override "/VERYSILENT"
 winget install --silent marha.VcXsrv
 
 ##############################
+# Windows Terminal setting
+##############################
+
+$new_guid=[Guid]::NewGuid()
+$git_bash_terminal_setting="{
+    `"commandline`": `"%PROGRAMFILES%\\Git\\bin\\bash.exe`",
+    `"guid`": `"{$new_guid}`",
+    `"hidden`": false,
+    `"icon`": `"%PROGRAMFILES%\\Git\\mingw64\\share\\git\\git-for-windows.ico`",
+    `"name`": `"Git Bash`",
+    `"startingDirectory`": `"%USERPROFILE%`"
+}"
+echo $git_bash_terminal_setting > ./git_settings.json
+
+##############################
 # Restore default power setting
 ##############################
 
