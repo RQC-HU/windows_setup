@@ -141,7 +141,7 @@
   }
   ```
 
-  - 保存して、Windows Terminalの画面にエラーが出なければ設定完了です(以降はwindows Terminalを使ってGit Bashを起動できるようになります)
+  - ctrl+sで保存して、Windows Terminalの画面にエラーが出なければ設定完了です(以降はwindows Terminalを使ってGit Bashを起動できるようになります)
   - Windows Terminal起動時のデフォルトをGit Bashに変更したい場合はWindows Terminalの設定から既定のプロファイルをGit Bashに変更してください
 
 ### 3.4. SSHの設定
@@ -205,7 +205,7 @@
 
 - img (README用画像フォルダ)
 - config.xlaunch (Xサーバ設定用ファイル)
-- do_not_turn_off.pow (スクリプト実行中にスリーブしないように強制させるためのファイル)
+- do_not_turn_off.pow (スクリプト実行中にスリープしないように強制させるためのファイル)
 - LICENCE (ライセンスファイル)
 - windowssetup.ps1 (Windowsに開発に必須/便利なソフトウェアのインストールを行うスクリプト)
 - README (このファイル)
