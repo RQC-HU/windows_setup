@@ -1,9 +1,10 @@
 *
+!.github/workflows/ci.yml
 !.gitignore
 !img
 !img/**
 !config.xlaunch
 !do_not_turn_off.pow
-!LICENCE
+!LICENSE
 !README.md
 !windowssetup.ps1
