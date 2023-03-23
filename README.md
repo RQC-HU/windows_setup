@@ -111,8 +111,8 @@
 
       Host ims
         HostName ccfep.center.ims.ac.jp
-        User {USER_NAME}
-        IdentityFile {IdentityFilePath}
+        User USER_NAME
+        IdentityFile IdentityFilePath
         ForwardX11  yes
         ForwardX11Trusted yes
     ```
